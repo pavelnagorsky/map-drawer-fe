@@ -1,0 +1,9 @@
+<map-marker
+  #markerEl="mapMarker"
+  *ngFor="let marker of markers; let i = index"
+  [position]="marker.getPosition()"
+  [title]="marker.getTitle()"
+  [icon]="marker.getIcon()"
+  (mapClick)="onViewInfo(markerEl, i)"
+>
+</map-marker>

@@ -1,0 +1,9 @@
+<map-rectangle 
+  #rectEl="mapRectangle"
+  *ngFor="let rect of rectangles; let i = index"
+  [bounds]="rect.getBounds()"
+  [options]="rect.getOptions()"
+  (boundsChanged)="onChangeRectangleBounds(rectEl, i)"
+  (rectangleClick)="onViewInfo(rectEl, i)"
+  (rectangleDblclick)="toggleRectEdit(i)"
+></map-rectangle>

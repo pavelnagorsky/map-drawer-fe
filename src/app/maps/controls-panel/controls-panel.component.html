@@ -1,0 +1,152 @@
+<div class="row my-3">
+  <div class="container-md" style="max-width: 550px;">
+    <div class="border p-3 shadow rounded">
+      <div class="h4 text-center mb-2">
+        Figure Controls
+      </div>     
+      <form [formGroup]="controlsForm">
+        <div class="form-check form-switch">
+          <input 
+            formControlName="enabled"
+            class="form-check-input" 
+            type="checkbox" 
+            role="switch"
+            id="drawingEnabled"
+          >
+          <label 
+            class="form-check-label" 
+            for="drawingEnabled"
+          >
+            Drawing mode
+          </label>
+        </div>        
+        <!-- Common options -->
+        <div class="mb-3">
+          <div class="form-group">
+            <label class="form-label" for="title">Title</label>
+            <input 
+              formControlName="title"
+              type="text" 
+              placeholder="Figure title" 
+              id="title" 
+              [class]="['form-control', isValid('title')].join(' ')" 
+              aria-describedby="titleHelp"
+            >
+            <div 
+              [ngClass]="{ 'd-none': !showControlMessage('title') }" 
+              id="titleHelp" 
+              class="form-text"
+            >
+              Please, provide a valid title
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="form-group">
+            <label class="form-label" for="description">Description</label>
+            <textarea
+              formControlName="description"
+              placeholder="Figure description" 
+              id="description" 
+              [class]="['form-control', isValid('description')].join(' ')" 
+              aria-describedby="descriptionHelp"
+            >
+            </textarea>
+            <div 
+              [ngClass]="{ 'd-none': !showControlMessage('description') }" 
+              id="descriptionHelp" 
+              class="form-text"
+            >
+              Please, provide a valid description
+            </div>
+          </div>
+        </div>
+        <div>
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <button 
+                [class]="['nav-link', isCurrentType('MARKER')].join(' ')"
+                type="button"
+                (click)="onChangeFigureType('MARKER')"
+              >
+                Marker
+              </button>
+            </li>
+            <li class="nav-item">
+              <button 
+                [class]="['nav-link', isCurrentType('RECTANGLE')].join(' ')"
+                type="button"
+                (click)="onChangeFigureType('RECTANGLE')"
+              >
+                Rectangle
+              </button>
+            </li>
+          </ul>
+        </div>
+        <!-- Marker options -->
+        <div 
+          class="my-3" 
+          *ngIf="controls.currentType === 'MARKER'"
+        >
+          <div class="form-group">
+            <label class="form-label" for="marker-type">Marker Type</label>
+            <select 
+              formControlName="markerType"
+              class="form-select form-select-sm" 
+              aria-label="marker image url"
+              id="marker-type"
+            >
+              <option 
+                *ngFor="let mType of markerTypes"
+                [selected]="mType.url === controls.markerControl.url" 
+                [value]="mType.url">
+                {{ mType.title }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- Rectangle options -->
+        <div   
+          class="my-3" 
+          *ngIf="controls.currentType === 'RECTANGLE'"
+        >
+          <div class="form-group mb-3">
+            <label for="fillColor" class="form-label">Fill color</label>
+            <input 
+              formControlName="rectangleFillColor"
+              type="color" 
+              class="form-control form-control-color" 
+              id="fillColor" 
+              [value]="controls.rectangleControl.fillColor" 
+              title="Choose rectangle's fill color"
+            >
+          </div>
+          <div class="form-group fill-opacity mb-3">
+            <label for="fillOpacity" class="form-label">Fill color opacity</label>
+            <input 
+              formControlName="rectangleFillOpacity"
+              type="range" 
+              class="form-range" 
+              min="0" 
+              max="1" 
+              step="0.1" 
+              [value]="controls.rectangleControl.fillOpacity" 
+              id="fillOpacity"
+            >
+          </div>
+          <div class="form-group mb-3">
+            <label for="strokeColor" class="form-label">Stroke color</label>
+            <input 
+              formControlName="rectangleStrokeColor"
+              type="color" 
+              class="form-control form-control-color" 
+              id="strokeColor" 
+              [value]="controls.rectangleControl.strokeColor" 
+              title="Choose rectangle's stroke color"
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+
+.bg-purple {
+  background-color: $gray-200;
+}
+
+.collapse.show {
+  animation: open 0.3s ease-in-out;
+}
+
+.show.collapsing {
+  animation: close 0.3s ease-in-out;
+}
+
+@keyframes open {
+  0% {
+    height: 0px;
+    opacity: 0;
+  }
+  100% {
+    height: 88px;
+    opacity: 0.5;
+  }
+}
+
+@keyframes close {
+  0% {
+    height: 88px;
+  }
+  100% {
+    height: 0px;
+    opacity: 0;
+  }
+}

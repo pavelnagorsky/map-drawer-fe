@@ -1,0 +1,13 @@
+<map-info-window *ngIf="figureData">
+  <h5>{{ figureData.title }}</h5>
+  <p>{{ figureData.description }}</p>
+  <p>Created: {{ figureData.createdAt | date }}</p>
+  <p>By user {{ figureData.author.username }}</p>
+  <button 
+    *ngIf="figureData.author.id === userId"
+    class="btn btn-sm btn-danger mt-1"
+    (click)="deleteFigure(figureData.id, figureData.author.id, figureData.type)"
+  >
+    Delete
+  </button>
+</map-info-window>
